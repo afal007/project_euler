@@ -9,6 +9,6 @@ package project.euler.task2;
  */
 public class TaskTwo {
   public static void main(String[] args) {
-    System.out.println(new Fibonacci().getEvenSum(100));
+    System.out.println(new Fibonacci().getEvenSum(4_000_000));
   }
 }

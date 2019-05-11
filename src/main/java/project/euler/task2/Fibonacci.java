@@ -1,11 +1,9 @@
 package project.euler.task2;
 
-import java.util.stream.Stream;
-
 /**
  * Helper class for actions with Fibonacci sequence
  */
-public class Fibonacci {
+class Fibonacci {
 
   /**
    * Method to find sum of all even Fibonacci numbers up to max.
@@ -30,11 +28,27 @@ public class Fibonacci {
     return sum;
   }
 
-  public int getEvenSumStream(int max) {
-    return Stream.iterate(new int[] {1, 1, 0}, a -> new int[] {a[1], a[0] + a[1], a[1] % 2 == 0 ? a[2] + a[1] : a[2]})
-      .limit(40)
-      .filter(a -> a[1] <= max)
-      .reduce((l, r) -> r)
-      .orElse(new int[] {1, 1, 0})[2];
+  /**
+   * Method to find sum of all even Fibonacci numbers up to max.
+   * Check for even avoided using formula, that gives only even Fibonacci numbers:
+   * E(n)=4*E(n-1)+E(n-2).
+   *
+   * @param max  max Fibonacci number to consider.
+   *
+   * @return  Sum of all even Fibonacci numbers p to max.
+   */
+  int getEvenSumOptimize(int max) {
+    int sum = 0;
+    int prev = 2;
+    int cur = 8;
+    while(prev < max) {
+      sum += prev;
+
+      int tmp = cur;
+      cur = 4 * cur + prev;
+      prev = tmp;
+    }
+
+    return sum;
   }
 }
